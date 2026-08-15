@@ -2,6 +2,18 @@
 
 All notable changes to this project are documented here.
 
+## [1.0.2] — 2026-08-16
+
+### Improved
+- Improved the userscript UI and controls.
+- Added the public GitHub Pages project website.
+- Improved English and Russian documentation.
+- Added the project preview image to the repository.
+
+### Reliability
+- Improved handling around Steam request retries and rate limits.
+- Added safer startup checks before cleanup requests are sent.
+
 ## [1.0.1] — 2026-08-16
 
 ### Fixed

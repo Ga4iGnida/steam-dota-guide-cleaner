@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Steam Dota 2 Guide Cleaner
 // @namespace    https://github.com/Ga4iGnida/steam-dota-guide-cleaner
-// @version      1.0.1
+// @version      1.0.2
 // @description  Safely unsubscribe from all subscribed Dota 2 Steam Workshop guides
 // @author       Ga4iGnida
 // @license      MIT
@@ -35,21 +35,21 @@
     const panel = document.createElement('div');
     panel.id = 'sdgc';
     panel.innerHTML = `
-      <div class="head"><div><b>🧹 Steam Guide Cleaner</b><small>v1.0.1</small></div><button id="mini">−</button></div>
+      <div class="head"><div><b>🧹 Steam Guide Cleaner</b><small>v1.0.2</small></div><button id="mini">−</button></div>
       <div id="body">
-        <div id="status" class="status">${authorized ? '⏳ Продолжаю очистку...' : '🔒 Ожидание запуска'}</div>
-        <div class="row"><span>На странице</span><b id="page">—</b></div>
-        <div class="row"><span>Отписано</span><b id="total">${total}</b></div>
-        <div class="bar"><i id="fill"></i></div><div id="progress" class="progress">Готов к запуску</div>
-        <section><b>⚙️ Скорость</b>
-          <label>Параллельные запросы <strong id="cv">${concurrency}</strong></label>
+        <div id="status" class="status">${authorized ? '⏳ Continuing cleanup...' : '🔒 Waiting to start'}</div>
+        <div class="row"><span>On page</span><b id="page">—</b></div>
+        <div class="row"><span>Unsubscribed</span><b id="total">${total}</b></div>
+        <div class="bar"><i id="fill"></i></div><div id="progress" class="progress">Ready to start</div>
+        <section><b>⚙️ Speed</b>
+          <label>Parallel requests <strong id="cv">${concurrency}</strong></label>
           <input id="ci" type="range" min="1" max="10" value="${concurrency}">
-          <label>Задержка <strong id="dv">${delay} мс</strong></label>
+          <label>Delay <strong id="dv">${delay} ms</strong></label>
           <input id="di" type="range" min="0" max="2000" step="10" value="${delay}">
         </section>
-        <button id="start" class="start">▶ НАЧАТЬ ОЧИСТКУ</button>
-        <button id="stop" class="stop">■ ОСТАНОВИТЬ</button>
-        <div class="warn">⚠️ Скрипт отменяет подписку на найденные руководства. Запуск требует явного подтверждения.</div>
+        <button id="start" class="start">▶ START CLEANUP</button>
+        <button id="stop" class="stop">■ STOP</button>
+        <div class="warn">⚠️ This script unsubscribes from found guides. Starting requires confirmation.</div>
       </div>`;
     document.body.appendChild(panel);
 
@@ -84,14 +84,14 @@
             catch(e) {
                 if(!authorized) throw e;
                 const wait=e.message==='RATE_LIMIT' ? 1000*Math.pow(2,a) : 250*(a+1);
-                if(e.message==='RATE_LIMIT') setStatus(`⏱️ Steam ограничил частоту. Жду ${wait} мс...`,'#ffb74d');
+                if(e.message==='RATE_LIMIT') setStatus(`⏱️ Steam rate limit. Waiting ${wait} ms...`,'#ffb74d');
                 await sleep(wait);
             }
         }
         throw Error('REQUEST_FAILED');
     }
 
-    function stopAll(msg='⏹ Остановлено. Новые запросы не отправляются.', color='#ff7777') {
+    function stopAll(msg='⏹ Stopped. No new requests will be sent.', color='#ff7777') {
         authorized=false; running=false; checking=false;
         sessionStorage.removeItem(K.auth); sessionStorage.removeItem(K.check);
         setRunning(false); setStatus(msg,color); updatePage();
@@ -100,7 +100,7 @@
     async function reloadForCheck() {
         sessionStorage.setItem(K.auth,'1');
         sessionStorage.setItem(K.check,'1');
-        setStatus('🔄 Страница очищена. Проверяю ещё раз...','#ffc107');
+        setStatus('🔄 Page cleared. Checking again...','#ffc107');
         await sleep(500);
         location.reload();
     }
@@ -117,9 +117,9 @@
         let elements=getSubs();
         if(checking) {
             checking=false; sessionStorage.removeItem(K.check);
-            if(elements.length===0) { stopAll(`🏁 Готово! Всего отписано: ${total}`,'#66ff66'); return; }
+            if(elements.length===0) { stopAll(`🏁 Done! Total unsubscribed: ${total}`,'#66ff66'); return; }
         }
-        if(elements.length===0) { stopAll('💤 Подписок нет. Готов к запуску.','#aaa'); return; }
+        if(elements.length===0) { stopAll('💤 No subscriptions found. Ready to start.','#aaa'); return; }
 
         const initial=elements.length;
         while(running && authorized) {
@@ -129,7 +129,7 @@
             page.textContent=remaining;
             const done=Math.max(0,initial-remaining), pct=Math.min(100,Math.round(done/initial*100));
             fill.style.width=pct+'%'; progress.textContent=`${done} / ${initial} • ${pct}%`;
-            setStatus(`🔥 Очищаю... осталось ${remaining}`,'#66ff66');
+            setStatus(`🔥 Cleaning... ${remaining} remaining`,'#66ff66');
 
             const batch=elements.slice(0,concurrency).map(element=>({element,id:getId(element)})).filter(x=>x.id);
             const results=await Promise.allSettled(batch.map(async x=>{await request(x.id);return x;}));
@@ -139,21 +139,21 @@
                 if(r.status==='fulfilled') { r.value.element.remove(); total++; ok++; localStorage.setItem(K.total,String(total)); updateTotal(); }
                 else console.error('[Steam Guide Cleaner]',r.reason);
             }
-            if(ok===0) { stopAll('⚠️ Не удалось выполнить запросы. Проверь Console.','#ff7777'); return; }
+            if(ok===0) { stopAll('⚠️ Requests failed. Check the Console.','#ff7777'); return; }
             if(delay) await sleep(delay);
         }
     }
 
     ci.oninput=()=>{ concurrency=Number(ci.value); cv.textContent=concurrency; saveSettings(); };
-    di.oninput=()=>{ delay=Number(di.value); dv.textContent=delay+' мс'; saveSettings(); };
+    di.oninput=()=>{ delay=Number(di.value); dv.textContent=delay+' ms'; saveSettings(); };
     $('mini').onclick=()=>panel.classList.toggle('collapsed');
 
     start.onclick=()=>{
         if(running) return;
-        if(!confirm('ВНИМАНИЕ!\n\nСкрипт отменит подписку на ВСЕ найденные руководства Dota 2.\n\nЭто действие нельзя автоматически отменить.\n\nПродолжить?')) return;
+        if(!confirm('⚠️ WARNING!\n\nThis will unsubscribe you from ALL found Dota 2 guides.\n\nThis action cannot be automatically undone.\n\nContinue?')) return;
         authorized=true; checking=false;
         sessionStorage.setItem(K.auth,'1'); sessionStorage.removeItem(K.check);
-        setStatus('🚀 Очистка разрешена.','#66ff66'); cleaner();
+        setStatus('🚀 Cleanup authorized.','#66ff66'); cleaner();
     };
     stop.onclick=()=>stopAll();
 

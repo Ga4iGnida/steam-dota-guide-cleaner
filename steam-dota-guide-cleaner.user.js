@@ -71,10 +71,12 @@
     const setRunning = v => { start.disabled=v; ci.disabled=v; di.disabled=v; };
 
     async function unsubscribe(id) {
+        if (!window.g_sessionID) throw Error('NO_SESSION');
         const body = new URLSearchParams({id, appid:'570', sessionid:window.g_sessionID});
         const r = await fetch('/sharedfiles/unsubscribe',{method:'POST',credentials:'include',headers:{'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'},body:body.toString()});
         if (r.status===429) throw Error('RATE_LIMIT');
-        if (!r.ok) throw Error(`HTTP ${r.status}`);
+        if (r.status>=500) throw Error(`SERVER_${r.status}`);
+        if (r.status>=400) throw Error(`HTTP_${r.status}`);
         return true;
     }
 
@@ -83,8 +85,10 @@
             try { return await unsubscribe(id); }
             catch(e) {
                 if(!authorized) throw e;
+                if (e.message === 'NO_SESSION' || /^HTTP_4/.test(e.message)) throw e;
                 const wait=e.message==='RATE_LIMIT' ? 1000*Math.pow(2,a) : 250*(a+1);
                 if(e.message==='RATE_LIMIT') setStatus(`⏱️ Steam rate limit. Waiting ${wait} ms...`,'#ffb74d');
+                else if(a === 0) setStatus('⏳ Steam request failed. Retrying...','#ffb74d');
                 await sleep(wait);
             }
         }
@@ -139,7 +143,11 @@
                 if(r.status==='fulfilled') { r.value.element.remove(); total++; ok++; localStorage.setItem(K.total,String(total)); updateTotal(); }
                 else console.error('[Steam Guide Cleaner]',r.reason);
             }
-            if(ok===0) { stopAll('⚠️ Requests failed. Check the Console.','#ff7777'); return; }
+            if(ok===0) {
+                const noSession = results.some(r => r.status==='rejected' && r.reason?.message==='NO_SESSION');
+                stopAll(noSession ? '⚠️ Steam session not found. Reload the page and try again.' : '⚠️ Requests failed. Check the Console.','#ff7777');
+                return;
+            }
             if(delay) await sleep(delay);
         }
     }
@@ -150,6 +158,7 @@
 
     start.onclick=()=>{
         if(running) return;
+        if(!window.g_sessionID) { setStatus('⚠️ Steam session not found. Reload the page and try again.','#ff7777'); return; }
         if(!confirm('⚠️ WARNING!\n\nThis will unsubscribe you from ALL found Dota 2 guides.\n\nThis action cannot be automatically undone.\n\nContinue?')) return;
         authorized=true; checking=false;
         sessionStorage.setItem(K.auth,'1'); sessionStorage.removeItem(K.check);

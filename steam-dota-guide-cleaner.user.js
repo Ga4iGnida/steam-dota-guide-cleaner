@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Steam Dota 2 Guide Cleaner
 // @namespace    https://github.com/Ga4iGnida/steam-dota-guide-cleaner
-// @version      1.0.0
+// @version      1.0.1
 // @description  Safely unsubscribe from all subscribed Dota 2 Steam Workshop guides
 // @author       Ga4iGnida
 // @license      MIT
@@ -15,7 +15,7 @@
 // @noframes
 // ==/UserScript==
 
-(function () {
+(async function () {
     'use strict';
 
     const p = new URLSearchParams(location.search);
@@ -35,7 +35,7 @@
     const panel = document.createElement('div');
     panel.id = 'sdgc';
     panel.innerHTML = `
-      <div class="head"><div><b>🧹 Steam Guide Cleaner</b><small>v1.0.0</small></div><button id="mini">−</button></div>
+      <div class="head"><div><b>🧹 Steam Guide Cleaner</b><small>v1.0.1</small></div><button id="mini">−</button></div>
       <div id="body">
         <div id="status" class="status">${authorized ? '⏳ Продолжаю очистку...' : '🔒 Ожидание запуска'}</div>
         <div class="row"><span>На странице</span><b id="page">—</b></div>

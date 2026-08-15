@@ -2,7 +2,6 @@
 
 [![Version](https://img.shields.io/github/v/release/Ga4iGnida/steam-dota-guide-cleaner?label=version)](https://github.com/Ga4iGnida/steam-dota-guide-cleaner/releases)
 [![License](https://img.shields.io/github/license/Ga4iGnida/steam-dota-guide-cleaner)](https://github.com/Ga4iGnida/steam-dota-guide-cleaner/blob/main/LICENSE)
-[![Issues](https://img.shields.io/github/issues/Ga4iGnida/steam-dota-guide-cleaner)](https://github.com/Ga4iGnida/steam-dota-guide-cleaner/issues)
 
 > **I got tired of unsubscribing from 1000 Dota 2 guides manually after 20 years of playing. So I made a script.**
 
@@ -84,23 +83,10 @@ That's literally why this project exists.
 
 It's just a small script that saves you from hours of pointless clicking.
 
-## 📸 Preview
+## 🐛 Found a bug or have an idea?
 
-> Screenshot coming soon — the README will be updated with the real cleaner panel once a current UI screenshot is captured.
-
-## 🔗 Project links
-
-- 📦 [Releases](https://github.com/Ga4iGnida/steam-dota-guide-cleaner/releases)
-- 🐛 [Report a bug](https://github.com/Ga4iGnida/steam-dota-guide-cleaner/issues/new?template=bug_report.md)
-- 💡 [Request a feature](https://github.com/Ga4iGnida/steam-dota-guide-cleaner/issues/new?template=feature_request.md)
-- 📝 [Changelog](./CHANGELOG.md)
-- 🌐 [Project website](https://ga4ignida.github.io/steam-dota-guide-cleaner/)
-
-## 📜 License
-
-MIT License.
-
-Use it, modify it, improve it.
+- **[Report a bug](https://github.com/Ga4iGnida/steam-dota-guide-cleaner/issues/new?template=bug_report.md)**
+- **[Suggest an improvement](https://github.com/Ga4iGnida/steam-dota-guide-cleaner/issues/new?template=feature_request.md)**
 
 ---
 
@@ -186,13 +172,10 @@ Steam говорит:
 
 Это просто небольшой скрипт, который экономит несколько часов тупого кликанья.
 
-## 🔗 Ссылки
+## 🐛 Нашёл ошибку или есть идея?
 
-- 📦 [Релизы](https://github.com/Ga4iGnida/steam-dota-guide-cleaner/releases)
-- 🐛 [Сообщить об ошибке](https://github.com/Ga4iGnida/steam-dota-guide-cleaner/issues/new?template=bug_report.md)
-- 💡 [Предложить улучшение](https://github.com/Ga4iGnida/steam-dota-guide-cleaner/issues/new?template=feature_request.md)
-- 📝 [История изменений](./CHANGELOG.md)
-- 🌐 [Сайт проекта](https://ga4ignida.github.io/steam-dota-guide-cleaner/)
+- **[Сообщить об ошибке](https://github.com/Ga4iGnida/steam-dota-guide-cleaner/issues/new?template=bug_report.md)**
+- **[Предложить улучшение](https://github.com/Ga4iGnida/steam-dota-guide-cleaner/issues/new?template=feature_request.md)**
 
 ## 📜 Лицензия
 

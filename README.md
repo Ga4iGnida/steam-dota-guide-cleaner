@@ -15,6 +15,10 @@ No thanks. 😄
 
 So I made **Steam Dota 2 Guide Cleaner** — a small Tampermonkey userscript that does the boring part for you.
 
+## 📸 Preview
+
+![Steam Guide Cleaner interface](GuideSuck.png)
+
 ## ✨ What it does
 
 - 🧹 Finds your subscribed Dota 2 guides

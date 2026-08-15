@@ -1,129 +1,177 @@
 # 🧹 Steam Dota 2 Guide Cleaner
 
-> **Я рот ебал отписываться от 1000 руководств в Dota 2 вручную после 20 лет игры. Поэтому просто написал скрипт.**
+> **I got tired of unsubscribing from 1000 Dota 2 guides manually after 20 years of playing. So I made a script.**
 
-Если ты когда-нибудь заходил в свои подписки Steam и видел там **сотни или тысячи руководств Dota 2**, то, скорее всего, уже понял проблему.
+If you've played Dota 2 for years, there's a good chance your Steam guide subscriptions are full of hundreds or even thousands of old guides.
 
-Steam предлагает прекрасный выбор:
+And Steam's solution is basically:
 
-**Отписаться → следующее → отписаться → следующее → отписаться...**
+**Unsubscribe → next → unsubscribe → next → unsubscribe...**
 
-И если ты играл много лет, то делать это вручную — ну его нахуй 😄
+No thanks. 😄
 
-Поэтому появился **Steam Dota 2 Guide Cleaner** — небольшой Tampermonkey-скрипт, который делает эту скучную работу за тебя.
+So I made **Steam Dota 2 Guide Cleaner** — a small Tampermonkey userscript that does the boring part for you.
 
-## ✨ Что он делает
+## ✨ What it does
 
-Скрипт открывает твою страницу подписок на руководства Dota 2 и постепенно убирает подписки.
+- 🧹 Finds your subscribed Dota 2 guides
+- ⚡ Unsubscribes from them in batches
+- 📊 Shows progress
+- 🔄 Reloads the page and keeps going
+- 🔍 Checks when there are no subscriptions left
+- 🛑 Stops automatically when the list is empty
+- ⏱️ Lets you control the speed
+- 🚦 Handles temporary Steam rate limits
+- 💾 Remembers your speed settings
 
-Он умеет:
+## 🔒 You are in control
 
-- 🧹 находить подписанные руководства;
-- ⚡ отписываться от них пачками;
-- 📊 показывать прогресс;
-- 🔄 обновлять страницу и продолжать работу;
-- 🔍 проверять, действительно ли подписки закончились;
-- 🛑 полностью останавливаться, когда больше нечего удалять;
-- ⏱️ настраивать скорость работы;
-- 🚦 переживать временные ограничения Steam;
-- 💾 помнить выбранные настройки скорости.
+The script **does nothing after installation**.
 
-## 🔒 Никакой самодеятельности
+You have to press:
 
-Я специально сделал запуск ручным.
+> **▶ START CLEANUP**
 
-После установки скрипт **ничего не удаляет сам**.
+Then confirm the action.
 
-Сначала ты должен нажать:
+Only after that will it start unsubscribing.
 
-> **▶ НАЧАТЬ ОЧИСТКУ**
+You can also press **STOP** at any time to stop sending new requests.
 
-После этого скрипт ещё раз спросит подтверждение.
+## ⚠️ Important
 
-Только после твоего согласия начинается отписка.
+This tool is for **mass-unsubscribing** from Dota 2 guides.
 
-Если нажать **«ОСТАНОВИТЬ»**, дальнейшие запросы на отписку прекращаются.
+Unsubscribing is not automatically reversible by the script, so make sure you really want to clean your subscriptions before starting.
 
-## ⚠️ Перед запуском
+## 📦 Installation
 
-Это инструмент для массовой отмены подписок.
+1. Install **Tampermonkey**.
+2. Open the userscript and install it.
+3. Open your Steam Dota 2 guide subscriptions.
+4. Press **START CLEANUP** and confirm.
 
-Если ты отписался от руководства, скрипт не сможет автоматически вернуть эту подписку обратно.
+**[👉 Install the script](https://raw.githubusercontent.com/Ga4iGnida/steam-dota-guide-cleaner/main/steam-dota-guide-cleaner.user.js)**
 
-Поэтому не нажимай кнопку просто из любопытства. Если хочешь сохранить какие-то руководства — сначала сохрани их или не запускай очистку.
+## ⚙️ Speed
 
-## 📦 Установка
+You can adjust:
 
-### 1. Установи Tampermonkey
+- **Parallel requests:** 1–10
+- **Delay:** 0–2000 ms
 
-Установи расширение Tampermonkey для своего браузера.
+A good starting point is **5 parallel requests + 50 ms delay**.
 
-### 2. Установи скрипт
+If Steam starts limiting requests, the script automatically waits and retries.
 
-Открой файл [`steam-dota-guide-cleaner.user.js`](./steam-dota-guide-cleaner.user.js) и установи его через Tampermonkey.
+## 🤷 Why?
 
-Или используй прямую установку:
+Because sometimes you just want to clean up your old subscriptions.
 
-**[👉 Установить скрипт](https://raw.githubusercontent.com/Ga4iGnida/steam-dota-guide-cleaner/main/steam-dota-guide-cleaner.user.js)**
+Steam says:
 
-### 3. Открой подписки Dota 2
+> “You have 1000 guides. Unsubscribe manually.”
 
-Зайди на страницу своих подписок на руководства Dota 2 в Steam.
+And you think:
 
-Справа появится панель **Steam Guide Cleaner**.
+**“Why the fuck should I?”**
 
-Нажимаешь кнопку, подтверждаешь — и можно заниматься своими делами.
+That's literally why this project exists.
 
-## ⚙️ Скорость
-
-В панели можно настроить две вещи.
-
-### Параллельные запросы
-
-От **1 до 10**.
-
-Больше — быстрее, но слишком агрессивные настройки могут привести к ограничениям со стороны Steam.
-
-### Задержка
-
-От **0 до 2000 мс** между пачками.
-
-Для начала можно оставить:
-
-**5 параллельных запросов + 50 мс задержки.**
-
-Если Steam начинает ограничивать частоту запросов, скрипт сам делает паузу и повторяет попытку позже.
-
-## 🤔 Зачем это вообще?
-
-Потому что иногда хочется просто очистить старый список подписок.
-
-Но когда Steam говорит:
-
-> «У тебя 1000 руководств. Отписывайся вручную.»
-
-возникает закономерный вопрос:
-
-**«А нахрена?»**
-
-Вот и всё предназначение этого проекта.
-
-Он не пытается быть каким-то великим инструментом автоматизации Steam.
-
-Это просто маленький скрипт, который экономит тебе несколько часов тупого кликанья.
-
-## 🛠️ Для разработчиков
-
-Проект полностью открыт. Можно посмотреть код, изменить его под себя или предложить улучшение.
-
-Если найдёшь баг — создай Issue.
-
-Если придумал нормальное улучшение — Pull Request тоже приветствуется.
+It's just a small script that saves you from hours of pointless clicking.
 
 ## 📜 License
 
 MIT License.
 
-Используй, изменяй и улучшай.
+Use it, modify it, improve it.
 
-И если этот скрипт избавил тебя от необходимости вручную отписываться от тысячи руководств — значит, он уже сделал всё, ради чего был написан. ❤️
+---
+
+# 🇷🇺 НА РУССКОМ:
+
+> **Я рот ебал отписываться от 1000 руководств в Dota 2 вручную после 20 лет игры. Поэтому просто написал скрипт.**
+
+Если ты играл в Dota 2 много лет, то наверняка в подписках Steam накопились сотни или даже тысячи старых руководств.
+
+А Steam предлагает прекрасный выбор:
+
+**Отписаться → следующее → отписаться → следующее → отписаться...**
+
+Ну его нахуй. 😄
+
+Поэтому я сделал **Steam Dota 2 Guide Cleaner** — небольшой Tampermonkey-скрипт, который делает эту скучную работу за тебя.
+
+## ✨ Что он делает
+
+- 🧹 Находит подписанные руководства Dota 2
+- ⚡ Отписывается от них пачками
+- 📊 Показывает прогресс
+- 🔄 Обновляет страницу и продолжает работу
+- 🔍 Проверяет, когда подписок больше не осталось
+- 🛑 Сам останавливается, когда список пуст
+- ⏱️ Позволяет настроить скорость
+- 🚦 Обрабатывает временные ограничения Steam
+- 💾 Запоминает настройки скорости
+
+## 🔒 Всё под твоим контролем
+
+После установки скрипт **ничего не делает сам**.
+
+Нужно нажать:
+
+> **▶ НАЧАТЬ ОЧИСТКУ**
+
+После этого он попросит подтверждение.
+
+Только после твоего согласия начинается отписка.
+
+В любой момент можно нажать **ОСТАНОВИТЬ**, чтобы прекратить отправку новых запросов.
+
+## ⚠️ Важно
+
+Это инструмент для **массовой отмены подписок** на руководства Dota 2.
+
+Скрипт не умеет автоматически возвращать отменённые подписки, поэтому перед запуском убедись, что действительно хочешь очистить список.
+
+## 📦 Установка
+
+1. Установи **Tampermonkey**.
+2. Открой userscript и установи его.
+3. Открой свои подписки на руководства Dota 2 в Steam.
+4. Нажми **НАЧАТЬ ОЧИСТКУ** и подтверди действие.
+
+**[👉 Установить скрипт](https://raw.githubusercontent.com/Ga4iGnida/steam-dota-guide-cleaner/main/steam-dota-guide-cleaner.user.js)**
+
+## ⚙️ Скорость
+
+Можно настроить:
+
+- **Параллельные запросы:** 1–10
+- **Задержка:** 0–2000 мс
+
+Хорошая стартовая настройка — **5 параллельных запросов + 50 мс задержки**.
+
+Если Steam начинает ограничивать запросы, скрипт сам подождёт и повторит попытку.
+
+## 🤷 Зачем это вообще?
+
+Потому что иногда просто хочется очистить старые подписки.
+
+Steam говорит:
+
+> «У тебя 1000 руководств. Отписывайся вручную.»
+
+А ты думаешь:
+
+**«А нахрена?»**
+
+Вот поэтому этот проект и существует.
+
+Это просто небольшой скрипт, который экономит несколько часов тупого кликанья.
+
+## 📜 Лицензия
+
+MIT License.
+
+Используй, изменяй, улучшай.

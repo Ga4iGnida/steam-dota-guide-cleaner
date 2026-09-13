@@ -13,7 +13,7 @@ And Steam's solution is basically:
 
 No thanks. 😄
 
-So I made **Steam Dota 2 Guide Cleaner** — a small Tampermonkey userscript that does the boring part for you.
+So I made **Steam Dota 2 Guide Cleaner** — a small Tampermonkey script that does the boring part for you.
 
 ## 📸 Preview
 
@@ -54,11 +54,11 @@ Unsubscribing is not automatically reversible by the script, so make sure you re
 ## 📦 Installation
 
 1. Install **Tampermonkey**.
-2. Open the userscript and install it.
+2. Install **Steam Dota 2 Guide Cleaner**.
 3. Open your Steam Dota 2 guide subscriptions.
 4. Press **START CLEANUP** and confirm.
 
-**[👉 Install the script](https://raw.githubusercontent.com/Ga4iGnida/steam-dota-guide-cleaner/main/steam-dota-guide-cleaner.user.js)**
+**[👉 Install Steam Dota 2 Guide Cleaner](https://raw.githubusercontent.com/Ga4iGnida/steam-dota-guide-cleaner/main/steam-dota-guide-cleaner.user.js)**
 
 ## ⚙️ Speed
 
@@ -86,6 +86,12 @@ And you think:
 That's literally why this project exists.
 
 It's just a small script that saves you from hours of pointless clicking.
+
+## ❤️ Support the author
+
+If **Steam Dota 2 Guide Cleaner** saved you some time and you want to support the project, you can buy me a coffee (or something stronger 😄) on Boosty:
+
+**[☕ Support me on Boosty](https://boosty.to/ga4ignida)**
 
 ## 🐛 Found a bug or have an idea?
 
@@ -143,11 +149,11 @@ It's just a small script that saves you from hours of pointless clicking.
 ## 📦 Установка
 
 1. Установи **Tampermonkey**.
-2. Открой userscript и установи его.
+2. Установи **Steam Dota 2 Guide Cleaner**.
 3. Открой свои подписки на руководства Dota 2 в Steam.
 4. Нажми **НАЧАТЬ ОЧИСТКУ** и подтверди действие.
 
-**[👉 Установить скрипт](https://raw.githubusercontent.com/Ga4iGnida/steam-dota-guide-cleaner/main/steam-dota-guide-cleaner.user.js)**
+**[👉 Установить Steam Dota 2 Guide Cleaner](https://raw.githubusercontent.com/Ga4iGnida/steam-dota-guide-cleaner/main/steam-dota-guide-cleaner.user.js)**
 
 ## ⚙️ Скорость
 
@@ -175,6 +181,12 @@ Steam говорит:
 Вот поэтому этот проект и существует.
 
 Это просто небольшой скрипт, который экономит несколько часов тупого кликанья.
+
+## ❤️ Поддержать автора
+
+Если **Steam Dota 2 Guide Cleaner** сэкономил тебе время и ты хочешь поддержать проект, можешь закинуть автору монетку на Boosty:
+
+**[☕ Поддержать автора на Boosty](https://boosty.to/ga4ignida)**
 
 ## 🐛 Нашёл ошибку или есть идея?
 
